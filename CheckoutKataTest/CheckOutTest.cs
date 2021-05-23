@@ -45,6 +45,18 @@ namespace CheckoutKataTest
             Assert.AreEqual(totalPrice,expectedPrice);
 
         }
+        [Test]
+        [TestCase("BB", 60)]
+        [TestCase("BA", 80)]
+        [TestCase("ABC", 100)]
+        [TestCase("ABCC", 120)]
+        [TestCase("CBA", 100)]
+
+        public void Scan_no_discount_combinations_and_expect_total(string scan, int expected)
+        {
+            Assert.AreEqual(expected, _checkout.Scan(scan).GetTotalPrice());
+        }
+
 
 
 

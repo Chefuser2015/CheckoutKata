@@ -36,13 +36,14 @@ namespace CheckoutKata
             var totalPrice = 0;
             if (_itemList.Any())
             {
-                foreach (var item in _itemList)
-                {
-                    totalPrice = _products.Single(p => p.SKU == item).Price;
-                }
+                totalPrice = _itemList.ToArray().Sum(CalculatePrice);
             }
             return totalPrice;
 
+        }
+        private int CalculatePrice(char sku)
+        {
+            return _products.SingleOrDefault(p => p.SKU == sku).Price;
         }
 
 
