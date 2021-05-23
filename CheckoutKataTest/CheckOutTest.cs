@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using CheckoutKata;
 using NUnit.Framework;
 
@@ -18,15 +16,15 @@ namespace CheckoutKataTest
         {
             var products = new List<Product>()
             {
-                new Product() {SKU = 'A', Price = 50},
-                new Product() {SKU = 'B', Price = 30},
-                new Product() {SKU = 'C', Price = 20},
-                new Product() {SKU = 'D', Price = 15}
+                new Product() {Sku = 'A', Price = 50},
+                new Product() {Sku = 'B', Price = 30},
+                new Product() {Sku = 'C', Price = 20},
+                new Product() {Sku = 'D', Price = 15}
             };
             IEnumerable<Discount> discounts = new[]
             {
-                new Discount{SKU = 'A', Quantity = 3, Value = 20},
-                new Discount{SKU = 'B', Quantity = 2, Value = 15}
+                new Discount{Sku = 'A', Quantity = 3, Value = 20},
+                new Discount{Sku = 'B', Quantity = 2, Value = 15}
             };
             _checkout = new CheckOut(products, discounts);
         }

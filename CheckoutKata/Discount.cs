@@ -2,7 +2,7 @@
 {
     public class Discount
     {
-        public char SKU { get; set; }
+        public char Sku { get; set; }
         public int Quantity { get; set; }
         public int Value { get; set; }
     }

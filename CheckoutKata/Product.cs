@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CheckoutKata
+﻿namespace CheckoutKata
 {
     public class Product
     { 
-        public char SKU { get; set; }
+        public char Sku { get; set; }
         public int Price { get; set; }
     }
 }
