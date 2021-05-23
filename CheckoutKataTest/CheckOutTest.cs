@@ -20,14 +20,13 @@ namespace CheckoutKataTest
             {
                 new Product() {SKU = 'A', Price = 50},
                 new Product() {SKU = 'B', Price = 30},
-                new Product() {SKU = 'C', Price = 20}
+                new Product() {SKU = 'C', Price = 20},
+                new Product() {SKU = 'D', Price = 15}
             };
             _checkout = new CheckOut(products);
         }
 
-        
-
-        [Test]
+       [Test]
         public void When_no_items_are_scanned_throw_Exception()
         {
           var result=  _checkout.Scan("").GetTotalPrice();
@@ -38,6 +37,8 @@ namespace CheckoutKataTest
         [TestCase("A",50)]
         [TestCase("B", 30)]
         [TestCase("C", 20)]
+        [TestCase("D", 15)]
+
         public void When_single_item_scanned_return_correct_price(string product, int expectedPrice)
         { 
             
@@ -48,14 +49,17 @@ namespace CheckoutKataTest
         [Test]
         [TestCase("BB", 60)]
         [TestCase("BA", 80)]
+        [TestCase("CD", 35)]
         [TestCase("ABC", 100)]
+        [TestCase("CBD", 65)]
         [TestCase("ABCC", 120)]
-        [TestCase("CBA", 100)]
+        [TestCase("DCBA", 115)]
 
         public void Scan_no_discount_combinations_and_expect_total(string scan, int expected)
         {
             Assert.AreEqual(expected, _checkout.Scan(scan).GetTotalPrice());
         }
+
 
 
 
