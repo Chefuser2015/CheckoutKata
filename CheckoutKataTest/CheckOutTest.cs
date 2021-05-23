@@ -23,7 +23,12 @@ namespace CheckoutKataTest
                 new Product() {SKU = 'C', Price = 20},
                 new Product() {SKU = 'D', Price = 15}
             };
-            _checkout = new CheckOut(products);
+            IEnumerable<Discount> discounts = new[]
+            {
+                new Discount{SKU = 'A', Quantity = 3, Value = 20},
+                new Discount{SKU = 'B', Quantity = 2, Value = 15}
+            };
+            _checkout = new CheckOut(products, discounts);
         }
 
        [Test]
@@ -47,7 +52,7 @@ namespace CheckoutKataTest
 
         }
         [Test]
-        [TestCase("BB", 60)]
+        [TestCase("AC", 70)]
         [TestCase("BA", 80)]
         [TestCase("CD", 35)]
         [TestCase("ABC", 100)]
@@ -56,6 +61,21 @@ namespace CheckoutKataTest
         [TestCase("DCBA", 115)]
 
         public void Scan_no_discount_combinations_and_expect_total(string scan, int expected)
+        {
+            Assert.AreEqual(expected, _checkout.Scan(scan).GetTotalPrice());
+        }
+
+        [Test]
+        [TestCase("AAA", 130)]
+        [TestCase("AAAB", 160)]
+        [TestCase("AAABB", 175)]
+        [TestCase("AAAAAA", 260)]
+        [TestCase("AAAAAABB", 305)]
+        [TestCase("BB", 45)]
+        [TestCase("ABB", 95)]
+        [TestCase("BBBB", 90)]
+        [TestCase("BBBBAC", 160)]
+        public void Scan_discounted_combinations_and_expect_correct_total(string scan, int expected)
         {
             Assert.AreEqual(expected, _checkout.Scan(scan).GetTotalPrice());
         }
