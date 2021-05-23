@@ -37,6 +37,7 @@ namespace CheckoutKataTest
         [Test]
         [TestCase("A",50)]
         [TestCase("B", 30)]
+        [TestCase("C", 20)]
         public void When_single_item_scanned_return_correct_price(string product, int expectedPrice)
         { 
             
