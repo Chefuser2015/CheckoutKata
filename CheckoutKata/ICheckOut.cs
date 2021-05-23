@@ -10,5 +10,6 @@ namespace CheckoutKata
     {
          int GetTotalPrice();
          ICheckOut Scan(String scan);
+         string ScannedProducts { get; }
     }
 }

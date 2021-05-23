@@ -81,6 +81,18 @@ namespace CheckoutKataTest
         }
 
 
+        [Test]
+        [TestCase("XYZKL", "")]
+        [TestCase("CDXY", "CD")]
+        [TestCase("ABCD", "ABCD")]
+        [TestCase("AXBYCZD", "ABCD")]
+        public void Scan_should_only_process_existing_product(string scan, string expected)
+        {
+            Assert.AreEqual(
+                expected,
+                (_checkout.Scan(scan).ScannedProducts)
+            );
+        }
 
 
 

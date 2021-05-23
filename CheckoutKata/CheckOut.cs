@@ -9,23 +9,24 @@ namespace CheckoutKata
 {
     public class CheckOut:ICheckOut
     {
-        private char[] _scannedItems;
+        private char[] scannedItems;
 
         private readonly IEnumerable<Product> _products;
         private readonly IEnumerable<Discount> _discounts;
+        public string ScannedProducts => new string(scannedItems);
 
         public CheckOut(IEnumerable<Product> products, IEnumerable<Discount> discounts)
         {
             _products = products;
             _discounts = discounts;
-            _scannedItems = new char[] { };
+            scannedItems = new char[] { };
         }
 
         public ICheckOut Scan(String scanItem)
         {
             if (!String.IsNullOrWhiteSpace(scanItem))
             {
-                _scannedItems = scanItem.ToCharArray().Where(sku => _products.Any(product => product.SKU == sku))
+                scannedItems = scanItem.ToCharArray().Where(sku => _products.Any(product => product.SKU == sku))
                     .ToArray();
             }
 
@@ -36,10 +37,10 @@ namespace CheckoutKata
         public int GetTotalPrice()
         {
             var totalPrice = 0;
-            if (_scannedItems.Any())
+            if (scannedItems.Any())
             {
-                totalPrice = _scannedItems.ToArray().Sum(CalculatePrice);
-                var totalDiscount = _discounts.Sum(discount => CalculateDiscount(discount, _scannedItems));
+                totalPrice = scannedItems.ToArray().Sum(CalculatePrice);
+                var totalDiscount = _discounts.Sum(discount => CalculateDiscount(discount, scannedItems));
                 totalPrice -= totalDiscount;
             }
             return totalPrice;
